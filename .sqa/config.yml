@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/PalomoIFCA/testsqaasproject:
+      branch: master
+      repo: https://gitlab.com/PalomoIFCA/testsqaasproject
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject git:
+        commands:
+        - /usr/bin/env sh .sqa/script.alabaster_grumpy_panda.sh
+        container: qc.acc_khaki_thankful_condor
+  QC.Doc:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.brown_rustic_stingray.sh
+        container: qc.doc_jade_brilliant_beaver
+      gitlab.com/PalomoIFCA/testsqaasproject git:
+        commands:
+        - /usr/bin/env sh .sqa/script.walnut_goofy_hamster.sh
+        container: qc.doc_glaucous_visionary_gerbil
+      gitlab.com/PalomoIFCA/testsqaasproject markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.coral_ambitious_puffin.sh
+        container: qc.doc_coral_bewildered_puffin
+  QC.Lic:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.linen_zealous_spider.sh
+        container: qc.lic_wine_fierce_iguana
+  QC.Sec:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.tan_peppy_capybara.sh
+        container: qc.sec_marina_studious_bullfrog
+  QC.Sty:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.cherry_philosophical_raven.sh
+        container: qc.sty_azure_polite_griffin
+  QC.Uni:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.polar_organized_bat.sh
+        container: qc.uni_apricot_wondrous_gecko
+  QC.Ver:
+    repos:
+      gitlab.com/PalomoIFCA/testsqaasproject get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunset_delighted_orangutan.sh
+        container: qc.ver_forest_grumpy_kraken
+timeout: 5400
